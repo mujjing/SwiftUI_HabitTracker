@@ -14,6 +14,7 @@
 		DB26F3E32902DAA4000B052C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26F3E22902DAA4000B052C /* Persistence.swift */; };
 		DB26F3E62902DAA4000B052C /* HabitTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB26F3E42902DAA4000B052C /* HabitTracker.xcdatamodeld */; };
 		DB26F3EF2902DC48000B052C /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26F3EE2902DC48000B052C /* Home.swift */; };
+		DBD4550129051D63009C3971 /* HabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4550029051D63009C3971 /* HabitViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		DB26F3E22902DAA4000B052C /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		DB26F3E52902DAA4000B052C /* HabitTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HabitTracker.xcdatamodel; sourceTree = "<group>"; };
 		DB26F3EE2902DC48000B052C /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		DBD4550029051D63009C3971 /* HabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 		DB26F3ED2902DC3E000B052C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				DBD4550029051D63009C3971 /* HabitViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 				DB26F3E32902DAA4000B052C /* Persistence.swift in Sources */,
 				DB26F3E62902DAA4000B052C /* HabitTracker.xcdatamodeld in Sources */,
 				DB26F3EF2902DC48000B052C /* Home.swift in Sources */,
+				DBD4550129051D63009C3971 /* HabitViewModel.swift in Sources */,
 				DB26F3DC2902DAA2000B052C /* ContentView.swift in Sources */,
 				DB26F3DA2902DAA2000B052C /* HabitTrackerApp.swift in Sources */,
 			);
