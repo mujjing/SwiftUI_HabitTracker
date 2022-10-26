@@ -91,7 +91,7 @@ struct AddNewHabit: View {
                         .labelsHidden()
                 }
                 
-                HStack {
+                HStack(spacing: 12) {
                     Label {
                         Text(habitViewModel.remainderDate.formatted(date: .omitted, time: .shortened))
                     } icon: {
@@ -100,8 +100,16 @@ struct AddNewHabit: View {
                     .padding(.horizontal)
                     .padding(.vertical, 12)
                     .background(Color("TFBG").opacity(0.4), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                    
+                    TextField("Reminder Text", text: $habitViewModel.remainderText)
+                        .padding(.horizontal)
+                        .padding(.vertical, 10)
+                        .background(Color("TFBG").opacity(0.4), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
                 }
+                .frame(height: habitViewModel.isRemainderOn ? nil : 0)
+                .opacity(habitViewModel.isRemainderOn ? 1 : 0)
             }
+            .animation(.easeOut, value: habitViewModel.isRemainderOn)
             .frame(maxHeight: .infinity, alignment: .top)
             .padding()
             .navigationBarTitleDisplayMode(.inline)
