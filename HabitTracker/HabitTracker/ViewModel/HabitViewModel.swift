@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import UserNotifications
 
 class HabitViewModel: ObservableObject {
     
@@ -24,7 +25,7 @@ class HabitViewModel: ObservableObject {
     @Published var showTimePicker: Bool = false
     
     //MARK: Adding Habit to Database
-    func addHabit(context: NSManagedObjectContext) -> Bool {
+    func addHabit(context: NSManagedObjectContext) async -> Bool {
         let habit = Habit(context: context)
         
         habit.title = title
@@ -37,6 +38,12 @@ class HabitViewModel: ObservableObject {
         
         if isRemainderOn {
             // MARK: Scheduling Notifications
+            if let ids = try? await scheduleNotifications() {
+                habit.notificationDs = ids
+                if let _ = try? context.save() {
+                    return true
+                }
+            }
         } else {
             // MARK: Adding Data
             if let _ = try? context.save() {
@@ -44,6 +51,45 @@ class HabitViewModel: ObservableObject {
             }
         }
         return false
+    }
+    
+    //MARK: Adding Notifications
+    func scheduleNotifications() async throws -> [String] {
+        let content = UNMutableNotificationContent()
+        content.title = "Habit 리마인더"
+        content.subtitle = remainderText
+        content.sound = UNNotificationSound.default
+        
+        // Schedule Ids
+        var notificationIDs: [String] = []
+        let calendar = Calendar.current
+        let weekdaySymbols: [String] = calendar.weekdaySymbols
+        
+        for weekday in weekDays {
+            let id = UUID().uuidString
+            let hour = calendar.component(.hour, from: remainderDate)
+            let min = calendar.component(.minute, from: remainderDate)
+            let day = weekdaySymbols.firstIndex { currentDay in
+                return currentDay == weekday
+            } ?? -1
+            
+            if day != -1 {
+                var components = DateComponents()
+                components.hour = hour
+                components.minute = min
+                components.weekday = day + 1
+                
+                let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+                
+                let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+                
+                try await UNUserNotificationCenter.current().add(request)
+                
+                notificationIDs.append(id)
+            }
+        }
+        
+        return notificationIDs
     }
     
     //MARK: Erasing Content

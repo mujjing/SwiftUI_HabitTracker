@@ -133,8 +133,10 @@ struct AddNewHabit: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        if habitViewModel.addHabit(context: env.managedObjectContext) {
-                            env.dismiss()
+                        Task {
+                            if await habitViewModel.addHabit(context: env.managedObjectContext) {
+                                env.dismiss()
+                            }
                         }
                     } label: {
                         Text("Done")
