@@ -25,6 +25,24 @@ class HabitViewModel: ObservableObject {
     
     //MARK: Adding Habit to Database
     func addHabit(context: NSManagedObjectContext) -> Bool {
+        let habit = Habit(context: context)
+        
+        habit.title = title
+        habit.color = habitColors
+        habit.weekDays = weekDays
+        habit.isRemainderOn = isRemainderOn
+        habit.remainderText = remainderText
+        habit.notificationDate = remainderDate
+        habit.notificationDs = []
+        
+        if isRemainderOn {
+            // MARK: Scheduling Notifications
+        } else {
+            // MARK: Adding Data
+            if let _ = try? context.save() {
+                return true
+            }
+        }
         return false
     }
     
