@@ -14,6 +14,7 @@
 		DB26F3E32902DAA4000B052C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26F3E22902DAA4000B052C /* Persistence.swift */; };
 		DB26F3E62902DAA4000B052C /* HabitTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB26F3E42902DAA4000B052C /* HabitTracker.xcdatamodeld */; };
 		DB26F3EF2902DC48000B052C /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26F3EE2902DC48000B052C /* Home.swift */; };
+		DB26FBA02908171500E9094C /* AddNewHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26FB9F2908171500E9094C /* AddNewHabit.swift */; };
 		DBD4550129051D63009C3971 /* HabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4550029051D63009C3971 /* HabitViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		DB26F3E22902DAA4000B052C /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		DB26F3E52902DAA4000B052C /* HabitTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HabitTracker.xcdatamodel; sourceTree = "<group>"; };
 		DB26F3EE2902DC48000B052C /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		DB26FB9F2908171500E9094C /* AddNewHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewHabit.swift; sourceTree = "<group>"; };
 		DBD4550029051D63009C3971 /* HabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				DB26F3EE2902DC48000B052C /* Home.swift */,
+				DB26FB9F2908171500E9094C /* AddNewHabit.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				DB26F3E32902DAA4000B052C /* Persistence.swift in Sources */,
 				DB26F3E62902DAA4000B052C /* HabitTracker.xcdatamodeld in Sources */,
 				DB26F3EF2902DC48000B052C /* Home.swift in Sources */,
+				DB26FBA02908171500E9094C /* AddNewHabit.swift in Sources */,
 				DBD4550129051D63009C3971 /* HabitViewModel.swift in Sources */,
 				DB26F3DC2902DAA2000B052C /* ContentView.swift in Sources */,
 				DB26F3DA2902DAA2000B052C /* HabitTrackerApp.swift in Sources */,
@@ -307,6 +311,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -336,6 +341,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
