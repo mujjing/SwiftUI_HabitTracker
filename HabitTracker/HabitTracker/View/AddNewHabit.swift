@@ -6,6 +6,8 @@ import SwiftUI
 
 struct AddNewHabit: View {
     @EnvironmentObject var habitViewModel: HabitViewModel
+    @Environment(\.self) var env
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 15) {
@@ -100,6 +102,11 @@ struct AddNewHabit: View {
                     .padding(.horizontal)
                     .padding(.vertical, 12)
                     .background(Color("TFBG").opacity(0.4), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                    .onTapGesture {
+                        withAnimation {
+                            habitViewModel.showTimePicker.toggle()
+                        }
+                    }
                     
                     TextField("Reminder Text", text: $habitViewModel.remainderText)
                         .padding(.horizontal)
@@ -117,7 +124,7 @@ struct AddNewHabit: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        
+                        env.dismiss()
                     } label: {
                         Image(systemName: "xmark.circle")
                     }
@@ -126,11 +133,38 @@ struct AddNewHabit: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        
+                        if habitViewModel.addHabit(context: env.managedObjectContext) {
+                            env.dismiss()
+                        }
                     } label: {
                         Text("Done")
                     }
                     .tint(.white)
+                    .disabled(!habitViewModel.doneStatus())
+                    .opacity(habitViewModel.doneStatus() ? 1 : 0.6)
+                }
+            }
+        }
+        .overlay {
+            if habitViewModel.showTimePicker {
+                ZStack {
+                    Rectangle()
+                        .fill(.ultraThinMaterial)
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            withAnimation {
+                                habitViewModel.showTimePicker.toggle()
+                            }
+                        }
+                    
+                    DatePicker.init("", selection: $habitViewModel.remainderDate, displayedComponents: [.hourAndMinute])
+                        .datePickerStyle(.wheel)
+                        .labelsHidden()
+                        .padding()
+                        .background {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color("TFBG"))
+                        }
                 }
             }
         }

@@ -47,7 +47,11 @@ struct Home: View {
         .frame(height: .infinity, alignment: .top)
         .padding()
         .sheet(isPresented: $habitViewModel.addNewHabits) {
+            //MARK: Erasing All Exisiting Content
             
+        } content: {
+            AddNewHabit()
+                .environmentObject(habitViewModel)
         }
     }
 }
