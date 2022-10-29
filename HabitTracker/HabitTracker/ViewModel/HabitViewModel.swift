@@ -24,6 +24,9 @@ class HabitViewModel: ObservableObject {
     //MARK: Reminder Time Picker
     @Published var showTimePicker: Bool = false
     
+    //MARK: Editing Habit
+    @Published var editingHabit: Habit?
+    
     //MARK: Adding Habit to Database
     func addHabit(context: NSManagedObjectContext) async -> Bool {
         let habit = Habit(context: context)
@@ -100,6 +103,19 @@ class HabitViewModel: ObservableObject {
         isRemainderOn = false
         remainderDate = Date()
         remainderText = ""
+        editingHabit = nil
+    }
+    
+    //MARK: Restoring Edit Data
+    func restoreEditHabit() {
+        if let editingHabit = editingHabit {
+            title = editingHabit.title ?? ""
+            habitColors = editingHabit.color ?? "Card1"
+            weekDays = editingHabit.weekDays ?? []
+            isRemainderOn = editingHabit.isRemainderOn
+            remainderDate = editingHabit.notificationDate ?? Date()
+            remainderText = editingHabit.remainderText ?? ""
+        }
     }
     
     //MARK: Done Status
