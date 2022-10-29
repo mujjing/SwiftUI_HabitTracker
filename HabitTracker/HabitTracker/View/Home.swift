@@ -34,6 +34,7 @@ struct Home: View {
                     
                     // Add Habit Button
                     Button {
+                        habitViewModel.editingHabit = nil
                         habitViewModel.addNewHabits.toggle()
                     } label: {
                         Label {

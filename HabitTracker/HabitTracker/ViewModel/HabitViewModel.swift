@@ -44,7 +44,17 @@ class HabitViewModel: ObservableObject {
     
     //MARK: Adding Habit to Database
     func addHabit(context: NSManagedObjectContext) async -> Bool {
-        let habit = Habit(context: context)
+        
+        //MARK: Editing Data
+        var habit: Habit!
+        if let editingHabit = editingHabit {
+            habit = editingHabit
+            // removing all pending notifications
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: editingHabit.notificationDs ?? [])
+            
+        } else {
+            habit = Habit(context: context)
+        }
         
         habit.title = title
         habit.color = habitColors
@@ -135,8 +145,11 @@ class HabitViewModel: ObservableObject {
     
     //MARK: Deleting Habit From Database
     func deleteHabit(context: NSManagedObjectContext) -> Bool {
-        if let edithabit = editingHabit {
-            context.delete(edithabit)
+        if let editingHabit = editingHabit {
+            if editingHabit.isRemainderOn {
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: editingHabit.notificationDs ?? [])
+            }
+            context.delete(editingHabit)
             
             // MARK: Adding Data
             if let _ = try? context.save() {
