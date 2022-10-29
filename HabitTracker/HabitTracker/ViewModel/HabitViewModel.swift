@@ -27,6 +27,21 @@ class HabitViewModel: ObservableObject {
     //MARK: Editing Habit
     @Published var editingHabit: Habit?
     
+    //MARK: Notification Access Status
+    @Published var notificationAccess: Bool = false
+    
+    init() {
+        requestNotificationAccess()
+    }
+    
+    func requestNotificationAccess() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert]) { status, _ in
+            DispatchQueue.main.async {
+                self.notificationAccess = status
+            }
+        }
+    }
+    
     //MARK: Adding Habit to Database
     func addHabit(context: NSManagedObjectContext) async -> Bool {
         let habit = Habit(context: context)
@@ -116,6 +131,19 @@ class HabitViewModel: ObservableObject {
             remainderDate = editingHabit.notificationDate ?? Date()
             remainderText = editingHabit.remainderText ?? ""
         }
+    }
+    
+    //MARK: Deleting Habit From Database
+    func deleteHabit(context: NSManagedObjectContext) -> Bool {
+        if let edithabit = editingHabit {
+            context.delete(edithabit)
+            
+            // MARK: Adding Data
+            if let _ = try? context.save() {
+                return true
+            }
+        }
+        return false
     }
     
     //MARK: Done Status

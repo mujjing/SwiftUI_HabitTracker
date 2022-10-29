@@ -134,7 +134,7 @@ extension Home {
         .onTapGesture {
             // MARK: Editing Habit
             habitViewModel.editingHabit = habit
-            habitViewModel.resetData()
+            habitViewModel.restoreEditHabit()
             habitViewModel.addNewHabits.toggle()
         }
     }

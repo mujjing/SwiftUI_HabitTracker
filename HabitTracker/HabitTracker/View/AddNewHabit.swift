@@ -92,6 +92,7 @@ struct AddNewHabit: View {
                     Toggle(isOn: $habitViewModel.isRemainderOn) {}
                         .labelsHidden()
                 }
+                .opacity(habitViewModel.notificationAccess ? 1 : 0)
                 
                 HStack(spacing: 12) {
                     Label {
@@ -115,12 +116,13 @@ struct AddNewHabit: View {
                 }
                 .frame(height: habitViewModel.isRemainderOn ? nil : 0)
                 .opacity(habitViewModel.isRemainderOn ? 1 : 0)
+                .opacity(habitViewModel.notificationAccess ? 1 : 0)
             }
             .animation(.easeOut, value: habitViewModel.isRemainderOn)
             .frame(maxHeight: .infinity, alignment: .top)
             .padding()
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Add Habit")
+            .navigationTitle(habitViewModel.editingHabit != nil ? "Edit Habit" : "Add Habit")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -129,6 +131,19 @@ struct AddNewHabit: View {
                         Image(systemName: "xmark.circle")
                     }
                     .tint(.white)
+                }
+                
+                //MARK: Delete Button
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        if habitViewModel.deleteHabit(context: env.managedObjectContext) {
+                            env.dismiss()
+                        }
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+                    .tint(.red)
+                    .opacity(habitViewModel.editingHabit == nil ? 0 : 1)
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
