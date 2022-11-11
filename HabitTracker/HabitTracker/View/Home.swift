@@ -9,6 +9,12 @@ struct Home: View {
     @StateObject var habitViewModel: HabitViewModel = .init()
     
     var body: some View {
+        content
+    }
+}
+
+extension Home {
+    private var content: some View {
         VStack {
             Text("Habits")
                 .font(.title2.bold())
@@ -61,9 +67,8 @@ struct Home: View {
                 .environmentObject(habitViewModel)
         }
     }
-}
-
-extension Home {
+    
+    
     @ViewBuilder
     func habitCardView(habit: Habit) -> some View {
         VStack(spacing: 6) {
